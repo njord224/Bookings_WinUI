@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Bookings_WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Bookings_WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

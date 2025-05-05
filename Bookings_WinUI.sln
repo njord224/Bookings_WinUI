@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookings_WinUI", "Bookings_WinUI\Bookings_WinUI.csproj", "{E6A4FC3E-CEAE-4F36-856D-EEACE0556997}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMLogic", "MVVMLogic\MVVMLogic.csproj", "{43B6C7F5-7C0A-4484-9180-809F6F844311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,18 @@ Global
 		{43B6C7F5-7C0A-4484-9180-809F6F844311}.Release|x64.Build.0 = Release|Any CPU
 		{43B6C7F5-7C0A-4484-9180-809F6F844311}.Release|x86.ActiveCfg = Release|Any CPU
 		{43B6C7F5-7C0A-4484-9180-809F6F844311}.Release|x86.Build.0 = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|x64.Build.0 = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Debug|x86.Build.0 = Debug|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|ARM64.Build.0 = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|x64.ActiveCfg = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|x64.Build.0 = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|x86.ActiveCfg = Release|Any CPU
+		{94DB7728-DA3C-43F2-9CEE-2AC5536F508B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

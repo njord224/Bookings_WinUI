@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MVVMLogic;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -23,14 +24,65 @@ namespace Bookings_WinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public MainViewModel ViewModel { get; set; } = new();
         public MainWindow()
         {
             this.InitializeComponent();
         }
-
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void NavigationView_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            // Navigates, but does not update the Menu.
+            // ContentFrame.Navigate(typeof(HomePage));
+
+            SetCurrentNavigationViewItem(GetNavigationViewItems(typeof(Pages.LogInPage)).First());
+        }
+        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            SetCurrentNavigationViewItem(args.SelectedItemContainer as NavigationViewItem);
+        }
+        public void SetCurrentNavigationViewItem(NavigationViewItem item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            if (item.Tag == null)
+            {
+                return;
+            }
+
+            ContentFrame.Navigate(
+            Type.GetType(item.Tag.ToString()),
+            item.Content);
+            NavigationView.Header = item.Content;
+            NavigationView.SelectedItem = item;
+        }
+        public List<NavigationViewItem> GetNavigationViewItems()
+        {
+            var result = new List<NavigationViewItem>();
+            var items = NavigationView.MenuItems.Select(i => (NavigationViewItem)i).ToList();
+            items.AddRange(NavigationView.FooterMenuItems.Select(i => (NavigationViewItem)i));
+            result.AddRange(items);
+
+            foreach (NavigationViewItem mainItem in items)
+            {
+                result.AddRange(mainItem.MenuItems.Select(i => (NavigationViewItem)i));
+            }
+
+            return result;
+        }
+        public List<NavigationViewItem> GetNavigationViewItems(Type type)
+        {
+            return GetNavigationViewItems().Where(i => i.Tag.ToString() == type.FullName).ToList();
+        }
+        public List<NavigationViewItem> GetNavigationViewItems(Type type, string title)
+        {
+            return GetNavigationViewItems(type).Where(ni => ni.Content.ToString() == title).ToList();
+        }
+        public NavigationViewItem GetCurrentNavigationViewItem()
+        {
+            return NavigationView.SelectedItem as NavigationViewItem;
         }
     }
 }

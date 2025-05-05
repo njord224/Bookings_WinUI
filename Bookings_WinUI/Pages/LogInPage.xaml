@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Bookings_WinUI.Pages.LogInPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bookings_WinUI.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="MainContainer" >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <!-- Default state: leftImage is hidden -->
+                <VisualState x:Name="DefaultState">
+                    <VisualState.Setters>
+                        <Setter Target="leftImage.Visibility" Value="Collapsed"/>
+                        <Setter Target="leftImage.Width" Value="0"/>
+                        <Setter Target="MainContainer.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                        <Setter Target="MainContainer.ColumnDefinitions" Value="*"/>
+                        <Setter Target="rightPanel.Grid.Column" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="leftImage.Visibility" Value="Visible"/>
+                        <Setter Target="leftImage.Width" Value="Auto"/>
+                        <Setter Target="MainContainer.Background" Value="White"/>
+                        <Setter Target="MainContainer.ColumnDefinitions" Value="*, *"/>
+                        <Setter Target="leftImage.Grid.Column" Value="0"/>
+                        <Setter Target="rightPanel.Grid.Column" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Image Source="/Assets/LogInImage.jpg" 
+               x:Name="leftImage" 
+               Grid.Column="0"
+               Stretch="UniformToFill"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"/>
+
+        <StackPanel x:Name="rightPanel" 
+                    Grid.Column="1"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="400"
+                    Margin="40">
+            
+            <!-- Header Section -->
+            <TextBlock Text="Welcome Back" 
+                       FontSize="32" 
+                       FontWeight="SemiBold" 
+                       Foreground="Black"
+                       Margin="0,0,0,8"/>
+            <TextBlock Text="Please sign in to continue" 
+                       FontSize="16" 
+                       Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                       Margin="0,0,0,32"/>
+
+            <!-- Login Form -->
+            <StackPanel Spacing="16">
+                <!-- Username Field -->
+                <StackPanel>
+                    <TextBlock Text="Username" 
+                               Margin="0,0,0,4"
+                               FontWeight="SemiBold"
+                               Foreground="Black"/>
+                    <TextBox x:Name="UsernameInput"
+                             PlaceholderText="Enter your username"
+                             Width="100%"
+                             Height="40"
+                             Padding="12,0,12,0"
+                             Foreground="Black"/>
+                </StackPanel>
+
+                <!-- Password Field -->
+                <StackPanel>
+                    <TextBlock Text="Password" 
+                               Margin="0,0,0,4"
+                               FontWeight="SemiBold"
+                               Foreground="Black"/>
+                    <PasswordBox x:Name="PasswordInput"
+                                PlaceholderText="Enter your password"
+                                Width="100%"
+                                Height="40"
+                                Padding="12,0,12,0"
+                                Foreground="Black"/>
+                </StackPanel>
+
+                <!-- Remember Me & Forgot Password -->
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <CheckBox Content="Remember me" 
+                              VerticalAlignment="Center"
+                              Foreground="Black"/>
+                    
+                    <HyperlinkButton Content="Forgot Password?" 
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Foreground="{ThemeResource SystemAccentColor}"/>
+                </Grid>
+
+                <!-- Login Button -->
+                <Button Content="Sign In" 
+                        Width="100%" 
+                        Height="44" 
+                        Margin="0,16,0,0"
+                        Background="{ThemeResource SystemAccentColor}"
+                        Foreground="White"
+                        FontWeight="SemiBold"/>
+
+                <!-- Sign Up Link -->
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            Margin="0,24,0,0">
+                    <TextBlock Text="Don't have an account? " 
+                               Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                    <HyperlinkButton Content="Sign up" 
+                                    Margin="-4,0,0,0"
+                                    Foreground="{ThemeResource SystemAccentColor}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

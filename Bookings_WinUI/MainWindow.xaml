@@ -5,11 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Bookings_WinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:core="using:MVVMLogic"
     mc:Ignorable="d"
     Title="Bookings_WinUI">
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <NavigationView x:Name="NavigationView"
+                IsBackButtonVisible="Collapsed"
+                IsSettingsVisible="False"
+                Loaded="NavigationView_Loaded"
+                SelectionChanged="NavigationView_SelectionChanged"
+                AlwaysShowHeader="False"
+                    IsPaneOpen="False">        
+        <NavigationView.MenuItems>
+            <NavigationViewItem Icon="OtherUser" Content="Log In" Tag="Bookings_WinUI.Pages.LogInPage" ToolTipService.ToolTip="Log In"/>
+            <NavigationViewItem Icon="Calendar" Content="Calendar" Tag="Bookings_WinUI.Pages.CalendarPage" ToolTipService.ToolTip="Appointments"/>
+        </NavigationView.MenuItems>
+
+        <Frame x:Name="ContentFrame" Background="AliceBlue">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition  />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+    </NavigationView>
 </Window>

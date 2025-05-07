@@ -9,127 +9,176 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="MainContainer" >
+    <Page.Resources>
+        <Storyboard x:Name="myStoryboard">
+            <ObjectAnimationUsingKeyFrames
+                Storyboard.TargetName="rightPanel"
+                Storyboard.TargetProperty="UIElement.RenderTransform.X"
+                Duration="0:0:0.750">                
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.100">
+                        <DiscreteObjectKeyFrame.Value>
+                            -10
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.200">
+                        <DiscreteObjectKeyFrame.Value>
+                            10
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.300">
+                        <DiscreteObjectKeyFrame.Value>
+                            -8
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.400">
+                        <DiscreteObjectKeyFrame.Value>
+                            8
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.500">
+                        <DiscreteObjectKeyFrame.Value>
+                            -5
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.600">
+                        <DiscreteObjectKeyFrame.Value>
+                            5
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.700">
+                        <DiscreteObjectKeyFrame.Value>
+                            -2
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.750">
+                        <DiscreteObjectKeyFrame.Value>
+                            0
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    
+    <Grid x:Name="MainContainer" ColumnDefinitions="*">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/LogInImage.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <!-- Default state: leftImage is hidden -->
-                <VisualState x:Name="DefaultState">
-                    <VisualState.Setters>
-                        <Setter Target="leftImage.Visibility" Value="Collapsed"/>
-                        <Setter Target="leftImage.Width" Value="0"/>
-                        <Setter Target="MainContainer.Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
-                        <Setter Target="MainContainer.ColumnDefinitions" Value="*"/>
-                        <Setter Target="rightPanel.Grid.Column" Value="0"/>
-                    </VisualState.Setters>
-                </VisualState>
-
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
+                        <AdaptiveTrigger MinWindowWidth="750" />
                     </VisualState.StateTriggers>
 
+                    <VisualState.Setters>                        
+                        <Setter Target="rightPanel.HorizontalAlignment" Value="Right"/>
+                        <Setter Target="rightPanel.Width" Value="600"/>
+                        
+                        <Setter Target="BottomOfForm.Orientation" Value="Horizontal"/>
+                    </VisualState.Setters>
+                </VisualState>
+                
+                <VisualState x:Name="DefaultState">
                     <VisualState.Setters>
-                        <Setter Target="leftImage.Visibility" Value="Visible"/>
-                        <Setter Target="leftImage.Width" Value="Auto"/>
-                        <Setter Target="MainContainer.Background" Value="White"/>
-                        <Setter Target="MainContainer.ColumnDefinitions" Value="*, *"/>
-                        <Setter Target="leftImage.Grid.Column" Value="0"/>
-                        <Setter Target="rightPanel.Grid.Column" Value="1"/>
+                        <Setter Target="rightPanel.HorizontalAlignment" Value="Strech"/>
+                        
+                        <Setter Target="MainContainer.Padding" Value="16"/>
+
+                        <Setter Target="BottomOfForm.Orientation" Value="Vertical"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Image Source="/Assets/LogInImage.jpg" 
-               x:Name="leftImage" 
-               Grid.Column="0"
-               Stretch="UniformToFill"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"/>
-
-        <StackPanel x:Name="rightPanel" 
-                    Grid.Column="1"
-                    HorizontalAlignment="Center" 
+        <StackPanel x:Name="rightPanel"
                     VerticalAlignment="Center" 
-                    Width="400"
-                    Margin="40">
-            
+                    MaxWidth="600"
+                    Padding="16"
+                    Margin="16"
+                    Grid.Column="0"
+                    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                    CornerRadius="16">
+
+            <StackPanel.RenderTransform>
+                <!-- If you give the transform a name 
+                 you can access it easily from code. -->
+                <TranslateTransform x:Name="LogInErrorTransform" />
+            </StackPanel.RenderTransform>
+
             <!-- Header Section -->
-            <TextBlock Text="Welcome Back" 
+            <TextBlock Text="Welcome" 
                        FontSize="32" 
                        FontWeight="SemiBold" 
-                       Foreground="Black"
-                       Margin="0,0,0,8"/>
+                       Margin="0,0,0,16"
+                       Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
             <TextBlock Text="Please sign in to continue" 
                        FontSize="16" 
-                       Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                       Margin="0,0,0,32"/>
+                       Margin="0,0,0,20"
+                       Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
 
             <!-- Login Form -->
             <StackPanel Spacing="16">
-                <!-- Username Field -->
-                <StackPanel>
-                    <TextBlock Text="Username" 
-                               Margin="0,0,0,4"
-                               FontWeight="SemiBold"
-                               Foreground="Black"/>
-                    <TextBox x:Name="UsernameInput"
-                             PlaceholderText="Enter your username"
-                             Width="100%"
-                             Height="40"
-                             Padding="12,0,12,0"
-                             Foreground="Black"/>
+                <StackPanel
+                    Spacing="12"
+                    HorizontalAlignment="Stretch">
+                        <TextBlock Text="Username" 
+                            FontWeight="SemiBold"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                        <TextBox x:Name="UsernameInput"
+                            PlaceholderText="Enter your username"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                            Background="{ThemeResource ControlSolidFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource ControlSolidFillColorDefaultBrush}"
+                            BorderThickness="1"
+                            HorizontalAlignment="Stretch"/>
+                        <TextBlock x:Name="usernameError" 
+                            Text="Username can not be empty" 
+                            FontWeight="SemiBold"
+                            Visibility="Collapsed"
+                            Foreground="{ThemeResource SystemFillColorAttentionBrush}"/>
                 </StackPanel>
-
-                <!-- Password Field -->
-                <StackPanel>
+                
+                <StackPanel
+                    Spacing="12"
+                    HorizontalAlignment="Stretch">
                     <TextBlock Text="Password" 
-                               Margin="0,0,0,4"
-                               FontWeight="SemiBold"
-                               Foreground="Black"/>
+                        FontWeight="SemiBold"
+                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                     <PasswordBox x:Name="PasswordInput"
-                                PlaceholderText="Enter your password"
-                                Width="100%"
-                                Height="40"
-                                Padding="12,0,12,0"
-                                Foreground="Black"/>
+                        PlaceholderText="Enter your password"
+                        HorizontalAlignment="Stretch"
+                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                        Background="{ThemeResource ControlSolidFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource ControlSolidFillColorDefaultBrush}"
+                        BorderThickness="1"/>
+                    <TextBlock x:Name="passwordError" 
+                        Text="Password can not be empty" 
+                        FontWeight="SemiBold"
+                        Visibility="Collapsed"
+                        Foreground="{ThemeResource SystemFillColorAttentionBrush}"/>
+
                 </StackPanel>
 
-                <!-- Remember Me & Forgot Password -->
-                <Grid Margin="0,8,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <CheckBox Content="Remember me" 
-                              VerticalAlignment="Center"
-                              Foreground="Black"/>
-                    
-                    <HyperlinkButton Content="Forgot Password?" 
-                                    Grid.Column="1"
-                                    VerticalAlignment="Center"
-                                    Foreground="{ThemeResource SystemAccentColor}"/>
-                </Grid>
+                <CheckBox x:Name="RememberMe"
+                            Content="Remember me"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
 
-                <!-- Login Button -->
-                <Button Content="Sign In" 
-                        Width="100%" 
-                        Height="44" 
-                        Margin="0,16,0,0"
-                        Background="{ThemeResource SystemAccentColor}"
-                        Foreground="White"
-                        FontWeight="SemiBold"/>
+                <StackPanel x:Name="CTAs" 
+                            Spacing="8"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button x:Name="showErrors" Content="Show Errors" 
+                            Background="{ThemeResource SystemAccentColorDark2}"
+                            Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                            FontWeight="SemiBold"
+                            Click="ShowErrors_BtnClick"/>
 
-                <!-- Sign Up Link -->
-                <StackPanel Orientation="Horizontal" 
-                            HorizontalAlignment="Center" 
-                            Margin="0,24,0,0">
-                    <TextBlock Text="Don't have an account? " 
-                               Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                    <HyperlinkButton Content="Sign up" 
-                                    Margin="-4,0,0,0"
-                                    Foreground="{ThemeResource SystemAccentColor}"/>
+                    <Button x:Name="singIn" Content="Sign In" 
+                            Background="{ThemeResource SystemAccentColor}"
+                            Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                            FontWeight="SemiBold"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

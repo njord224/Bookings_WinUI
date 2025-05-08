@@ -6,18 +6,13 @@ namespace MVVMLogic
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        public partial int Counter { get; set; }
+        public partial int Month { get; set; }
+
 
         [RelayCommand]
-        public void IncrementCounter()
+        public void SetNewMonth(int month)
         {
-            Counter++;
-        }
-
-        [RelayCommand]
-        public void DecrementCounter()
-        {
-            Counter--;
+            Month = month;
         }
     }
 }

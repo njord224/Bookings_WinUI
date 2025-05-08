@@ -72,20 +72,16 @@
                         <AdaptiveTrigger MinWindowWidth="750" />
                     </VisualState.StateTriggers>
 
-                    <VisualState.Setters>                        
-                        <Setter Target="rightPanel.HorizontalAlignment" Value="Right"/>
-                        <Setter Target="rightPanel.Width" Value="600"/>
-                        
+                    <VisualState.Setters>
+                        <Setter Target="rightPanel.Width" Value="600"/>                        
                         <Setter Target="BottomOfForm.Orientation" Value="Horizontal"/>
                     </VisualState.Setters>
                 </VisualState>
                 
                 <VisualState x:Name="DefaultState">
                     <VisualState.Setters>
-                        <Setter Target="rightPanel.HorizontalAlignment" Value="Strech"/>
-                        
+                        <Setter Target="rightPanel.HorizontalAlignment" Value="Strech"/>                        
                         <Setter Target="MainContainer.Padding" Value="16"/>
-
                         <Setter Target="BottomOfForm.Orientation" Value="Vertical"/>
                     </VisualState.Setters>
                 </VisualState>
